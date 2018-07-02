@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style media="screen">
+      .label-check,.label-check-line{
+        position: relative;
+          user-select: none;
+          cursor: pointer;
+      }
+      .label-check>input,.label-check-line>input{
+        opacity: 0;
+      }
+      .label-check>.checkmark{
+        position: absolute;
+        top: 1;
+        left: 0;
+        height: 16px;
+        width: 16px;
+        border: 1px solid #5a5a5b;
+        margin-top: 3px;
+        transition: 1s ease-out;
+      }
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid #9f9f9f;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+      .label-check>input:disabled~.checkmark::before{
+       content: '\2716';
+        position: absolute;
+       border-color: white;
+      }
+      .label-check input:checked~.checkmark:after{
+        display: block;
+      }
+      /* border */
+      .label-check.border-check>.checkmark{
+        border-radius: 12%;
+      }
+      /* circle */
+      .label-check.circle input:checked~.checkmark:after{
+        display: block;
+        top: 4px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #9f9f9f;
+      }
+      .label-check.circle>.checkmark{
+        border-radius: 50%;
+      }
+      .label-check.primary.circle input:checked~.checkmark:after,
+      .label-check.success.circle input:checked~.checkmark:after,
+      .label-check.danger.circle input:checked~.checkmark:after,
+      .label-check.warning.circle input:checked~.checkmark:after,
+      .label-check.info.circle input:checked~.checkmark:after,
+      .label-check.light.circle input:checked~.checkmark:after,
+      .label-check.dark.circle input:checked~.checkmark:after,
+      .label-check.orange.circle input:checked~.checkmark:after
+      {
+        background: white;
+      }
+            /*circle md*/
+      .label-check.circle.md input:checked~.checkmark:after{
+        left: 4.4px;
+        width: 10px;
+        height: 10px;
+      }
+            /*circle lg*/
+      .label-check.circle.lg input:checked~.checkmark:after{
+        top: 5px;
+        left: 5px;
+        width: 13px;
+        height: 13px;
+      }
+
+      /* check */
+      .label-check.primary .checkmark:after,
+      .label-check.success .checkmark:after,
+      .label-check.danger .checkmark:after,
+      .label-check.warning .checkmark:after,
+      .label-check.info .checkmark:after,
+      .label-check.light .checkmark:after,
+      .label-check.dark .checkmark:after,
+      .label-check.orange .checkmark:after
+      {
+        border: solid white;
+        border-width: 0 2px 2px 0;
+      }
+      /* colors */
+      .label-check.primary>.checkmark{border: 1px solid #007bff;}
+      .label-check.success>.checkmark{border: 1px solid #27b848;}
+      .label-check.danger>.checkmark{border: 1px solid #e13546;}
+      .label-check.warning>.checkmark{border: 1px solid #d39e00;}
+      .label-check.info>.checkmark{border: 1px solid #17a2b8;}
+      .label-check.light>.checkmark{border: 1px solid #dae0e5;}
+      .label-check.dark>.checkmark{border: 1px solid #1d2124;}
+      .label-check.orange>.checkmark{border: 1px solid orange;}
+
+
+      .label-check.primary:not(.icon) input:checked~.checkmark {background-color: #007bff;}
+      .label-check.success:not(.icon) input:checked~.checkmark {background-color: #27b848;}
+      .label-check.danger:not(.icon) input:checked~.checkmark {background-color: #e13546;}
+      .label-check.warning:not(.icon) input:checked~.checkmark {background-color: #d39e00;}
+      .label-check.info:not(.icon) input:checked~.checkmark {background-color: #17a2b8;}
+      .label-check.light:not(.icon) input:checked~.checkmark {background-color: #dae0e5;}
+      .label-check.light:not(.icon) input:checked~.checkmark {background-color: #1d2124;}
+      .label-check.orange:not(.icon) input:checked~.checkmark {background-color: orange;}
+
+
+
+      /* medidas md */
+      .label-check.md>.checkmark,.label-check.md>input{
+        height: 20px;
+        width: 20px;
+      }
+      .label-check.md>.checkmark:after{
+        top: 2px;
+        left: 7px;
+        width: 6px;
+        height: 12px;
+      }
+      /* medidas lg */
+      .label-check.lg>.checkmark,.label-check.lg>input{
+        height: 25px;
+        width: 25px;
+      }
+      .label-check.lg>.checkmark:after{
+        top: 2px;
+        left: 8px;
+        width: 7px;
+        height: 15px;
+      }
+
+      /*label-check-line */
+      .label-check-line{
+        background-color: #007bff;
+        color:white;
+        padding: 2px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        padding-left: 35px;
+      }
+      .label-check-line input:checked~.checkmark:after,.label-check-line>input{
+        position: absolute;
+        display: block;
+        border-color: white;
+        top:8px;
+        left:13px;
+      }
+
+      .label-check-line input:not(:checked)~.checkmark::before {
+       content: '\2716';
+        position: absolute;
+       border-color: white;
+       top: 3px;
+       left: 10px;
+      }
+      .label-check-line input:disabled~.checkmark {
+      opacity: 0.3;
+      cursor: auto;
+  }
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+
+    <div class="container mt-5 mb-5  ">
+      <div class="col-md-12 pt-5">
+        <h1 class="text-primary">CHECKS</h1>
+      </div>
+      <div class="col-md-12 mt-2 ">
+        <h2>Basico</h2>
+        <label class="label-check ">
+                  <input type="checkbox" class="all-check" name="eliminar[]" disabled="">
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+        <label class="label-check   circle">
+                  <input type="checkbox" class="all-check" name="eliminar[]">
+                  <span class="checkmark"></span>
+                  check2
+        </label>
+      </div>
+      <div class="col-md-12 mt-2">
+        <h2>border</h2>
+        <label class="label-check  md border-check">
+                  <input type="checkbox" class="all-check" name="name[]" >
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+        <label class="label-check  md border-check">
+                  <input type="checkbox" class="all-check" name="name[]" >
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+      </div>
+      <div class="col-md-12 mt-2">
+        <h2>Medida md</h2>
+        <label class="label-check  md">
+                  <input type="checkbox" class="all-check" name="name[]" >
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+        <label class="label-check  circle md">
+                  <input type="checkbox" class="all-check" name="name[]" >
+                  <span class="checkmark"></span>
+                  check2
+        </label>
+      </div>
+      <div class="col-md-12 mt-2">
+        <h2>Medida lg</h2>
+        <label class="label-check  lg">
+                  <input type="checkbox"  name="name[]">
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+        <label class="label-check  circle lg">
+                  <input type="checkbox"  name="name[]">
+                  <span class="checkmark"></span>
+                  check2
+        </label>
+      </div>
+      <div class="col-md-12 mt-5  ">
+        <h2>Colores</h2>
+        <div class="row">
+          <div class="col-md-3">
+            <h4 class="text-primary">primary</h4>
+            <label class="label-check primary md ">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check1
+            </label>
+            <label class="label-check primary circle md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check2
+            </label>
+          </div>
+
+          <div class="col-md-3">
+            <h4 class="text-success">success</h4>
+            <label class="label-check success md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check1
+            </label>
+            <label class="label-check success circle md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check2
+            </label>
+          </div>
+
+          <div class="col-md-3">
+            <h4 class="text-danger">danger</h4>
+            <label class="label-check danger md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check1
+            </label>
+            <label class="label-check danger circle md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check2
+            </label>
+          </div>
+
+          <div class="col-md-3">
+            <h4 class="text-warning">warning</h4>
+            <label class="label-check warning md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check1
+            </label>
+            <label class="label-check warning circle md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check2
+            </label>
+          </div>
+
+          <div class="col-md-3">
+            <h4 class="text-info">info</h4>
+            <label class="label-check info md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check1
+            </label>
+            <label class="label-check info circle md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check2
+            </label>
+          </div>
+          <div class="col-md-3">
+            <h4 class="text-warning">Orange</h4>
+            <label class="label-check orange md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check1
+            </label>
+            <label class="label-check orange circle md">
+                      <input type="checkbox"  name="name[]"  checked>
+                      <span class="checkmark"></span>
+                      check2
+            </label>
+          </div>
+
+          <div class="col-md-12 pb-5">
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-3">
+        <h4 class="text-warning">Orange</h4>
+        <label class="label-check-line primary  ">
+                  <input type="checkbox"  name="name[]"  >
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+        <label class="label-check-line primary line ">
+                  <input type="checkbox"  name="name[]"  >
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+        <label class="label-check-line primary line ">
+                  <input type="checkbox" name="name[]" value="44"  disabled="">
+                  <span class="checkmark"></span>
+                  check1
+        </label>
+      </div>
+
+    </div>
+  </body>
+
+</html>
